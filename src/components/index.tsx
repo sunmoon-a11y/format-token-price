@@ -1,7 +1,7 @@
 import numeral from "numeral";
 import { useMemo } from "react";
 
-import { FormatAmountProps } from "./interface.ts";
+import { FormatTokenPriceProps } from "./interface.ts";
 import BigNumber from "bignumber.js";
 
 const subscript = [
@@ -43,7 +43,7 @@ function showLessAmount(n: string, howMany0 = 4, decimals = 8) {
   return y ? (t.match(reg1) ?? t) : n
 }
 
-const FormatAmount = (
+const FormatTokenPrice = (
   {
     local,
     amount,
@@ -53,7 +53,7 @@ const FormatAmount = (
     decimals = 8,
     howMany0 = 4,
     lessThan = 0
-  }: FormatAmountProps) => {
+  }: FormatTokenPriceProps) => {
   return useMemo(
     () => {
       const _amount = Number(amount)
@@ -74,4 +74,4 @@ const FormatAmount = (
   );
 };
 
-export default FormatAmount;
+export default FormatTokenPrice;

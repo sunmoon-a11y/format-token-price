@@ -1,6 +1,8 @@
-import FormatAmount from "./components";
+import FormatTokenPrice from "./components";
+
+export type { FormatTokenPriceProps } from './components/interface'
 
 export {
-  FormatAmount,
+  FormatTokenPrice,
 };
 

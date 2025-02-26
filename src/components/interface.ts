@@ -1,4 +1,4 @@
-export interface FormatAmountProps {
+export interface FormatTokenPriceProps {
   local?: boolean;
   amount: string;
   prefix?: string;
