@@ -30,7 +30,7 @@ const f = (value: string, decimal = 8): string => {
   return output.replace(regexp, "$1");
 };
 
-function showLessAmount(n: string, howMany0 = 4, decimals = 8) {
+export function showLessAmount(n: string, howMany0 = 4, decimals = 8) {
   const reg1 = new RegExp(`(0.0(₁|₂|₃|₄|₅|₆|₇|₈|₉|.{3}))(\\d{0,${decimals}})`, 'g')
   let t = n
   const reg2 = new RegExp(`(0{${howMany0}})`, 'g')
