@@ -14,8 +14,7 @@ const subscript = [
   '₆',
   '₇',
   '₈',
-  '₉',
-  '...'
+  '₉'
 ]
 
 const o = (value: string, decimal = 8, local?: boolean): string => {
@@ -34,13 +33,17 @@ const f = (value: string, decimal = 8): string => {
 function showLessAmount(n: string, howMany0 = 4, decimals = 8) {
   const reg1 = new RegExp(`(0.0(₁|₂|₃|₄|₅|₆|₇|₈|₉|.{3}))(\\d{0,${decimals}})`, 'g')
   let t = n
-  const reg2 = new RegExp(`(0{${howMany0},})`, 'g')
+  const reg2 = new RegExp(`(0{${howMany0}})`, 'g')
   const y = t.match(reg2)
   y &&
-  y.forEach((i) => {
+  [y[0]].forEach((i) => {
     t = t.replace(i, `0${subscript[i.split('').length] ?? '...'}`)
   })
-  return y ? (t.match(reg1) ?? t) : n
+  return y
+    ? (t.match(reg1)
+      ? t.match(reg1)?.[0]?.replace(/(\d+?)0+$/, "$1")
+      : t)
+    : n
 }
 
 const FormatTokenPrice = (
@@ -59,14 +62,16 @@ const FormatTokenPrice = (
       const _amount = Number(amount)
 
       if (lessThan > 0 && _amount > 0 && _amount < lessThan) return (
-        <span className={"_format-amount"} style={{display:'flex', alignItems:'center'}}><small>{'<'}&nbsp;</small>{`${prefix}${lessThan}`}</span>)
+        <span className={"_format-amount"} style={{
+          display: 'flex',
+          alignItems: 'center'
+        }}><small>{'<'}&nbsp;</small>{`${prefix}${lessThan}`}</span>)
 
-      if (showLess && _amount > 0 && howMany0 >= 4 && new BigNumber(amount).lt(0.0001)) {
-        console.info(99)
-        const fixedAmount = Number(amount).toFixed(18)
+      if (showLess && _amount > 0 && howMany0 >= 4 && new BigNumber(amount).lt('0.0001')) {
+        const fixedAmount = new BigNumber(amount).toFixed(18)
         return `${prefix}${showLessAmount(fixedAmount, howMany0, decimals)}`
       }
-      console.info(howMany0)
+
       const output = <>{prefix}{format ? numeral(amount).format(format) : _amount === 0 ? "0.00" : o(amount, decimals, local)}</>
 
       return (<span className={"_format-amount"}>{output}</span>)

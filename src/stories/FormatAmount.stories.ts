@@ -20,8 +20,8 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Demo7: Story = {
   args: {
-    amount: '0.00009999',
+    amount: '0.00003574111111000001073793',
     showLess:true,
-    decimals: 4
+    decimals: 8
   },
 };
