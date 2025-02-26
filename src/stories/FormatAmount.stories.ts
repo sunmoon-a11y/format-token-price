@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import FormatAmount from "../components";
+import FormatTokenPrice from "../components";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Example/FormatAmount",
-  component: FormatAmount,
+  title: "Example/FormatTokenPrice",
+  component: FormatTokenPrice,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
@@ -12,7 +12,7 @@ const meta = {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   args: {},
-} satisfies Meta<typeof FormatAmount>;
+} satisfies Meta<typeof FormatTokenPrice>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -20,7 +20,8 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Demo7: Story = {
   args: {
-    amount: '9999990.0000999999',
-    format:'0a,0.00'
+    amount: '0.00009999',
+    showLess:true,
+    decimals: 4
   },
 };

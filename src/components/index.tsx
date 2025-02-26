@@ -61,16 +61,17 @@ const FormatTokenPrice = (
       if (lessThan > 0 && _amount > 0 && _amount < lessThan) return (
         <span className={"_format-amount"} style={{display:'flex', alignItems:'center'}}><small>{'<'}&nbsp;</small>{`${prefix}${lessThan}`}</span>)
 
-      if (showLess && _amount > 0 && howMany0 >= 4 && new BigNumber(amount).lt(0.00001)) {
+      if (showLess && _amount > 0 && howMany0 >= 4 && new BigNumber(amount).lt(0.0001)) {
+        console.info(99)
         const fixedAmount = Number(amount).toFixed(18)
         return `${prefix}${showLessAmount(fixedAmount, howMany0, decimals)}`
       }
-
+      console.info(howMany0)
       const output = <>{prefix}{format ? numeral(amount).format(format) : _amount === 0 ? "0.00" : o(amount, decimals, local)}</>
 
       return (<span className={"_format-amount"}>{output}</span>)
     },
-    [prefix, format, amount, showLess, lessThan],
+    [amount, lessThan, prefix, showLess, howMany0, format, decimals, local],
   );
 };
 
