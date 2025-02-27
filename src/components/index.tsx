@@ -19,11 +19,11 @@ const subscript = [
 
 const o = (value: string, decimal = 8, local?: boolean): string => {
   const str = String(value)
-  const _value = f(str.indexOf(".") > -1 ? str : `${str}.0`, decimal)
+  const _value = abandonInvalid0(str.indexOf(".") > -1 ? str : `${str}.0`, decimal)
   return local ? _value.replace(/\d+/, (m) => m.replace(/(\d)(?=(\d{3})+$)/g, ($1) => $1 + ',')) : _value;
 };
 
-const f = (value: string, decimal = 8): string => {
+export const abandonInvalid0 = (value: string, decimal = 8): string => {
   const regexp = /(?:\.0*|(\.\d+?)0+)$/;
   const [a, b] = value.split(".");
   const output = `${a}.${b.substring(0, decimal)}`;
